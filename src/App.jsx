@@ -27,10 +27,12 @@ function App() {
   }
   function handleReset() {
     localStorage.clear();
+    console.log(localStorage.getItem("items"));
+    console.log(localStorage.getItem("layouts"));
     setTimeout(() => {
       setLayouts([]);
       setItems(originalItems);
-    }, 100);
+    }, 50);
   }
   function handleRemove(i) {
     setItems((items) => items.filter((item) => item.i !== i));
