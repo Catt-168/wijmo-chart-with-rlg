@@ -3,13 +3,19 @@ import { WidthProvider, Responsive } from "react-grid-layout";
 
 import Pie from "./components/Pie";
 
+let flag = false;
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 const origianlLayouts = JSON.parse(localStorage.getItem("layouts")) || "{}";
-const originalItems = JSON.parse(localStorage.getItem("items")) || [
+const originalItem = [
   { i: "1", x: 0, y: 0, w: 5, h: 3 },
   { i: "2", x: 5, y: 0, w: 4, h: 3 },
   { i: "3", x: 9, y: 0, w: 3, h: 3 },
 ];
+const originalItems = !flag
+  ? JSON.parse(localStorage.getItem("items"))
+    ? JSON.parse(localStorage.getItem("items"))
+    : originalItem
+  : originalItem;
 function App() {
   const [layouts, setLayouts] = useState(origianlLayouts);
   const [isEditable, setIsEditable] = useState(false);
@@ -31,10 +37,11 @@ function App() {
     console.log(localStorage.getItem("layouts"));
     setTimeout(() => {
       setLayouts([]);
-      setItems(originalItems);
+      setItems(originalItem);
     }, 50);
   }
   function handleRemove(i) {
+    flag = true;
     setItems((items) => items.filter((item) => item.i !== i));
   }
 
