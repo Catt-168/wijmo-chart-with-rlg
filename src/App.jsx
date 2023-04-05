@@ -11,9 +11,10 @@ const originalItem = [
   { i: "2", x: 5, y: 0, w: 4, h: 3 },
   { i: "3", x: 9, y: 0, w: 3, h: 3 },
 ];
+const jsonItems = JSON.parse(localStorage.getItem("items"));
 const originalItems = !flag
-  ? JSON.parse(localStorage.getItem("items"))
-    ? JSON.parse(localStorage.getItem("items"))
+  ? jsonItems
+    ? jsonItems
     : originalItem
   : originalItem;
 function App() {
